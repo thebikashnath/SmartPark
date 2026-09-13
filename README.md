@@ -144,14 +144,13 @@ Open `index.html` in your browser.
 
 ### Option 2 — VS Code
 
-Use the **Live Server** extension and open `index.html` 
-https://smartpark-cyxs.onrender.com
+Use the **Live Server** extension and open `index.html`.
 
 ---
 
 ## 🌐 Deploy on Render
 
-Create a **Static Site** in Render and connect this GitHub repository.
+https://smartpark-cyxs.onrender.com
 
 Use:
 
