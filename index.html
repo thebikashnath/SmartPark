@@ -13,12 +13,89 @@ section{padding:48px 0}.title{display:flex;justify-content:space-between;align-i
 .booking{padding:22px}.booking h3{margin-top:0}.field{margin:13px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#07111f;color:white}.ticket{display:none;margin-top:16px;padding:16px;border-radius:15px;background:#091a2c;border:1px dashed #39bdf855}.ticket.show{display:block}.qr{width:115px;height:115px;margin:12px auto;background:repeating-linear-gradient(45deg,#fff 0 4px,#07111f 4px 8px);border:8px solid white}.code{text-align:center;font-weight:900;letter-spacing:2px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:21px}.num{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#39bdf81c;color:var(--blue);font-weight:900}.step p{color:var(--muted);font-size:14px;line-height:1.5}.footer{border-top:1px solid var(--line);padding:35px 0 55px;color:#7f94ad}.toast{display:none;position:fixed;right:18px;bottom:18px;z-index:30;padding:14px 16px;border-radius:12px;background:#10243d;border:1px solid #39bdf855;box-shadow:0 20px 50px #0008}.toast.show{display:block}
 @media(max-width:850px){.hero,.layout{grid-template-columns:1fr}.stats,.steps{grid-template-columns:repeat(2,1fr)}nav a{display:none}}@media(max-width:520px){.stats,.steps{grid-template-columns:1fr}.parking{grid-template-columns:repeat(4,1fr);padding:12px}.hero{padding-top:45px}}
-</style></head>
+</style>
+<style>
+/* Premium SmartPark visual layer */
+:root{
+  --sp-bg:#050b14;--sp-surface:#0a1422;--sp-surface2:#0e1d30;
+  --sp-line:rgba(148,163,184,.14);--sp-blue:#38bdf8;--sp-green:#34d399;
+}
+body{
+  background:
+    radial-gradient(700px 400px at 8% -5%,rgba(56,189,248,.16),transparent 60%),
+    radial-gradient(650px 380px at 92% 5%,rgba(52,211,153,.12),transparent 60%),
+    linear-gradient(180deg,#050b14 0%,#07111f 45%,#050b14 100%);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+header{box-shadow:0 10px 40px rgba(0,0,0,.18)}
+nav{max-width:1240px!important}
+.logo{font-size:24px!important;display:flex;align-items:center;gap:9px}
+.logo:before{content:"P";display:grid;place-items:center;width:32px;height:32px;border-radius:10px;
+background:linear-gradient(135deg,var(--sp-blue),#2563eb);color:#04101b;font-size:16px;box-shadow:0 8px 24px #38bdf833}
+.hero{max-width:1240px!important;padding-top:88px!important}
+.hero h1{
+  background:linear-gradient(100deg,#fff 20%,#a9ddf5 62%,#6ee7b7);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{max-width:700px!important}
+.card,.phone{
+  box-shadow:0 24px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+.phone{position:relative}
+.phone:before{content:"LIVE";position:absolute;right:26px;top:26px;z-index:2;font-size:9px;font-weight:900;
+padding:5px 8px;border-radius:99px;color:#aef3d1;background:#34d39912;border:1px solid #34d39944}
+.stats{gap:16px!important}
+.stat{position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;width:90px;height:90px;right:-45px;top:-45px;border-radius:50%;
+background:radial-gradient(circle,#38bdf822,transparent 68%)}
+.layout{gap:20px!important}
+.map{background:linear-gradient(145deg,rgba(14,29,48,.95),rgba(7,17,31,.95))!important}
+.parking{
+  background:
+   linear-gradient(90deg,transparent 49%,rgba(255,255,255,.035) 50%,transparent 51%),
+   #050d18!important;
+  background-size:25% 100%;
+}
+.slot{position:relative;overflow:hidden}
+.slot:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 45%);pointer-events:none}
+.booking{background:linear-gradient(145deg,#10263f,#091626)!important}
+.ticket{
+  animation:ticketIn .35s ease both;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+@keyframes ticketIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.qr{position:relative;overflow:hidden}
+.qr:after{content:"";position:absolute;left:0;right:0;height:3px;top:20%;
+background:#38bdf8;box-shadow:0 0 16px #38bdf8;animation:scan 2s linear infinite}
+@keyframes scan{0%{top:12%}50%{top:82%}100%{top:12%}}
+.step{transition:.25s}
+.step:hover{transform:translateY(-5px);border-color:#38bdf833}
+.num{box-shadow:0 0 25px #38bdf814}
+button{box-shadow:0 10px 30px #38bdf81c!important}
+button.secondary{box-shadow:none!important}
+@media(max-width:850px){.hero{padding-top:55px!important}}
+</style>
+
+</head>
 <body>
 <header><nav><div class="logo">Smart<b>Park</b></div><div><a href="#parking">Live Parking</a><a href="#booking">Book Space</a><a href="#how">How It Works</a></div></nav></header>
 <main>
 <div class="hero"><div><span class="badge"><span class="dot"></span> Building parking system online</span><h1>Park. Scan. Go.</h1><p>A digital parking experience for malls, offices and managed buildings. Get a QR ticket at the gate, see vacant spaces live, reserve a space instantly, and use the same digital ticket for entry and exit.</p><div class="actions"><button onclick="go('parking')">View Live Spaces</button><button class="secondary" onclick="go('booking')">Book a Parking Space</button></div></div>
 <div class="phone"><div class="screen"><div class="top"><span>SmartPark App</span><span>9:41</span></div><h3>City Centre Mall</h3><div class="mini">Live parking availability</div><div class="occupancy"><div class="ring"><b>69%</b></div><div><b>153 spaces available</b><div class="mini">347 occupied · 500 total</div></div></div><div class="mini" style="margin-top:18px">Ground Floor</div><div class="minimap" id="mini"></div><button style="width:100%;margin-top:18px" onclick="go('booking')">Reserve a Space</button></div></div></div>
+
+
+<div class="wrap" style="padding-bottom:8px">
+  <div class="card" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;padding:0;overflow:hidden;background:#ffffff0d">
+    <div style="padding:18px 20px;background:#091525"><div style="font-weight:900">⚡ Instant reservation</div><div class="mini" style="margin-top:4px">Reserve an available slot in seconds.</div></div>
+    <div style="padding:18px 20px;background:#091525"><div style="font-weight:900">🔐 One QR pass</div><div class="mini" style="margin-top:4px">Use the same ticket at entry and exit.</div></div>
+    <div style="padding:18px 20px;background:#091525"><div style="font-weight:900">📡 Live availability</div><div class="mini" style="margin-top:4px">See building occupancy floor by floor.</div></div>
+  </div>
+</div>
 
 <section class="wrap" id="parking"><div class="title"><div><h2>Live parking status</h2><p>Select a green space to reserve it.</p></div><span class="badge"><span class="dot"></span> Live system</span></div>
 <div class="stats"><div class="card stat"><small>Total spaces</small><strong>500</strong></div><div class="card stat"><small>Available now</small><strong class="greenText" id="available">153</strong></div><div class="card stat"><small>Occupied</small><strong>347</strong></div><div class="card stat"><small>Occupancy</small><strong class="blueText">69.4%</strong></div></div>
