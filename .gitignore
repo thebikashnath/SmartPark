@@ -1,20 +1,14 @@
-# OS
-.DS_Store
-Thumbs.db
-
 # IDE
 .vscode/
 .idea/
 
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
 # Environment
 .env
 .env.*
-
-# Future Node
-node_modules/
-dist/
-build/
-
-# Future Java
-target/
-*.class

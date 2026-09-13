@@ -1,209 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartPark — Mall Parking Management</title>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartPark | Digital Parking</title>
 <style>
-:root{--ink:#101828;--muted:#667085;--line:#e4e7ec;--bg:#f7f9fc;--card:#fff;--brand:#175cd3;--brand2:#004eeb;--green:#12b76a;--red:#f04438;--yellow:#f79009}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}a{text-decoration:none;color:inherit}
-.nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:20}.logo{font-size:23px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--brand)}.links{display:flex;gap:28px;color:#475467;font-size:14px}.navbtn{border:1px solid #d0d5dd;background:#fff;border-radius:10px;padding:11px 17px;font-weight:800;cursor:pointer}.navbtn:hover{background:#f2f4f7}
-.hero{max-width:1200px;margin:auto;padding:70px 6% 55px;display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}.badge{display:inline-flex;align-items:center;gap:8px;background:#eff8ff;color:#175cd3;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800}.badge i{width:7px;height:7px;border-radius:50%;background:var(--green)}h1{font-size:56px;line-height:1.04;letter-spacing:-3px;margin:18px 0}.hero h1 span{color:var(--brand)}.hero p{color:var(--muted);font-size:17px;line-height:1.65;max-width:590px}.actions{display:flex;gap:12px;margin-top:26px}.primary{border:0;background:var(--brand);color:#fff;padding:14px 19px;border-radius:11px;font-weight:800;cursor:pointer}.primary:hover{background:var(--brand2)}.secondary{border:1px solid #d0d5dd;background:#fff;padding:14px 19px;border-radius:11px;font-weight:800;cursor:pointer}
-.dashboard{background:#111827;border-radius:26px;padding:12px;box-shadow:0 25px 70px #10182825}.screen{background:#f8fafc;border-radius:18px;overflow:hidden}.screenhead{background:#fff;padding:17px;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}.live{color:var(--green);font-size:12px;font-weight:800}.overview{padding:17px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mini{background:#fff;border:1px solid var(--line);padding:13px;border-radius:12px}.mini b{font-size:23px}.mini small{display:block;color:var(--muted);margin-top:4px}.parkingmap{margin:0 17px 17px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.maptitle{display:flex;justify-content:space-between;margin-bottom:12px;font-size:12px;font-weight:800}.slots{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.slot{height:30px;border-radius:6px;display:grid;place-items:center;font-size:9px;font-weight:800}.free{background:#d1fadf;color:#067647}.occupied{background:#fee4e2;color:#b42318}.reserved{background:#fef0c7;color:#b54708}
-.stats{max-width:1120px;margin:0 auto 65px;padding:0 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.stat{background:#fff;border:1px solid var(--line);padding:20px;border-radius:15px}.stat b{font-size:27px}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
-.section{background:#fff;padding:70px 6%}.section h2{text-align:center;font-size:35px;letter-spacing:-1.5px;margin:0 0 10px}.sub{text-align:center;color:var(--muted);max-width:680px;margin:0 auto 38px}.cards{max-width:1120px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:16px;padding:21px;background:#fff}.icon{font-size:27px}.card h3{font-size:16px;margin:14px 0 7px}.card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
-.operations{max-width:1120px;margin:65px auto;padding:0 6%}.opsbox{background:#101828;border-radius:25px;padding:35px;color:#fff;display:grid;grid-template-columns:.8fr 1.2fr;gap:30px}.opsbox h2{font-size:32px;margin:0 0 10px;letter-spacing:-1px}.opsbox p{color:#c8ced8;line-height:1.6}.control{background:#fff;color:var(--ink);border-radius:18px;padding:19px}.controltop{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.floor{display:flex;gap:7px}.floor button{border:1px solid #d0d5dd;background:#fff;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}.floor button.active{background:#eff8ff;color:var(--brand);border-color:#b2ddff}.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-bottom:13px}.legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:4px}.lgfree:before{background:#12b76a}.lgocc:before{background:#f04438}.lgres:before{background:#f79009}.bigslots{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}.bigslot{height:39px;border-radius:7px;display:grid;place-items:center;font-size:10px;font-weight:800;cursor:pointer}.bigslot:hover{outline:2px solid #84adff}
-.booking{max-width:1050px;margin:65px auto;padding:0 6%}.bookingbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.bookingbox h2{font-size:30px;margin:0 0 10px}.bookingbox p{color:var(--muted);line-height:1.6}.form{background:#f8fafc;border-radius:15px;padding:18px}.form label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}.form input,.form select{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:9px;background:#fff;margin-bottom:13px}.full{width:100%}
-footer{background:#fff;border-top:1px solid var(--line);padding:28px 6%;display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
-@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:45px}.hero h1{font-size:43px}.links{display:none}.cards{grid-template-columns:1fr 1fr}.opsbox,.bookingbox{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
-@media(max-width:520px){.cards{grid-template-columns:1fr}.actions{flex-direction:column}.slots{grid-template-columns:repeat(4,1fr)}.bigslots{grid-template-columns:repeat(4,1fr)}}
-</style>
-
-<style>
-/* SmartPark visual upgrade */
-:root{
-  --bg:#07111f; --surface:#0d1b2f; --surface2:#12243d; --line:rgba(148,163,184,.16);
-  --text:#eef6ff; --muted:#9db0c8; --accent:#38bdf8; --accent2:#22c55e;
-}
-html{scroll-behavior:smooth}
-body{
-  background:
-    radial-gradient(circle at 10% 0%, rgba(56,189,248,.13), transparent 28%),
-    radial-gradient(circle at 90% 8%, rgba(34,197,94,.10), transparent 25%),
-    linear-gradient(180deg,#07111f 0%,#091525 48%,#07111f 100%);
-}
-body:before{
-  content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 85%);
-}
-header,.nav,.navbar{backdrop-filter:blur(16px);background:rgba(7,17,31,.72)!important;border-bottom:1px solid var(--line)}
-*{box-sizing:border-box}
-button,.btn{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-button:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.22)}
-.card,.panel,.stat,.dashboard-card,.feature-card{
-  border:1px solid var(--line)!important;
-  box-shadow:0 18px 50px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.035);
-  background:linear-gradient(145deg,rgba(18,36,61,.92),rgba(9,24,42,.92))!important;
-}
-.hero{position:relative;overflow:hidden}
-.hero:after{
-  content:"";position:absolute;width:360px;height:360px;right:-100px;top:-120px;border-radius:50%;
-  background:radial-gradient(circle,rgba(56,189,248,.18),transparent 68%);pointer-events:none;
-}
-h1,h2,h3{letter-spacing:-.03em}
-h1{font-size:clamp(2.7rem,6vw,5.4rem)!important;line-height:.98!important}
-.feature-card,.stat{transition:transform .25s ease,border-color .25s ease}
-.feature-card:hover,.stat:hover{transform:translateY(-5px);border-color:rgba(56,189,248,.32)!important}
-.slot{transition:transform .15s ease,filter .15s ease}
-.slot:hover{transform:scale(1.07);filter:brightness(1.12)}
-.floor-btn.active,.tab.active{box-shadow:0 0 0 1px rgba(56,189,248,.35),0 8px 28px rgba(56,189,248,.12)}
-input,select{background:rgba(4,12,24,.65)!important;border-color:var(--line)!important;color:var(--text)!important}
-input:focus,select:focus{outline:none;border-color:rgba(56,189,248,.7)!important;box-shadow:0 0 0 4px rgba(56,189,248,.10)!important}
-.badge,.pill{box-shadow:0 0 24px rgba(34,197,94,.08)}
-@media(max-width:700px){
-  .container{padding-left:18px!important;padding-right:18px!important}
-  h1{font-size:3rem!important}
-}
-</style>
-
-</head>
+:root{--bg:#07111f;--card:#0d1b2e;--line:#ffffff18;--text:#f5f9ff;--muted:#9bb0c9;--blue:#39bdf8;--green:#35d07f;--yellow:#f6c453;--red:#ff6577}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 8% 0,#12385c,transparent 30%),radial-gradient(circle at 92% 5%,#123d36,transparent 28%),var(--bg)}
+header{position:sticky;top:0;z-index:10;background:#07111fd9;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}nav,.wrap{max-width:1180px;margin:auto;padding-left:22px;padding-right:22px}nav{height:68px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:23px}.logo b{color:var(--blue)}nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:14px}
+.hero{max-width:1180px;margin:auto;padding:72px 22px 45px;display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #35d07f44;border-radius:99px;padding:8px 12px;color:#b9f2d0;background:#35d07f0c;font-size:13px}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+h1{font-size:clamp(44px,6vw,76px);line-height:.98;letter-spacing:-.06em;margin:20px 0 16px}.hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}button{border:0;border-radius:11px;padding:13px 17px;font-weight:800;cursor:pointer;background:var(--blue);color:#04101c;transition:.2s}button:hover{transform:translateY(-2px)}button.secondary{background:#ffffff0a;color:white;border:1px solid var(--line)}
+.phone{max-width:390px;margin:auto;padding:14px;border-radius:30px;background:linear-gradient(145deg,#102943,#091626);border:1px solid var(--line);box-shadow:0 30px 80px #0008}.screen{min-height:450px;border-radius:22px;background:#07111f;padding:20px}.top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.screen h3{margin:25px 0 4px}.mini{font-size:13px;color:var(--muted)}.occupancy{margin-top:17px;padding:15px;border:1px solid var(--line);border-radius:17px;display:flex;align-items:center;gap:15px}.ring{width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0 69%,#18304b 69%);position:relative}.ring:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#0d1b2e}.ring b{position:relative;z-index:1;font-size:13px}.minimap{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}.mini-slot{height:28px;border-radius:5px}.free{background:var(--green)}.occupied{background:var(--red)}.reserved{background:var(--yellow)}
+section{padding:48px 0}.title{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.title h2{font-size:34px;letter-spacing:-.04em;margin:0}.title p{color:var(--muted)}.card{background:linear-gradient(145deg,#10243ddd,#0b192bdd);border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 55px #0004}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:20px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:30px;margin-top:8px}.greenText{color:var(--green)}.blueText{color:var(--blue)}
+.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:18px}.map{padding:22px}.toolbar{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.floor{background:#ffffff08;color:#b7c7d9;border:1px solid var(--line)}.floor.active{background:#39bdf822;color:#bfeeff;border-color:#39bdf855}.parking{display:grid;grid-template-columns:repeat(8,1fr);gap:9px;padding:18px;background:#07111f;border-radius:16px}.slot{min-height:64px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:2px solid transparent;cursor:pointer;transition:.15s}.slot:hover{transform:scale(1.04)}.slot small{font-size:9px;margin-top:4px;opacity:.8}
+.booking{padding:22px}.booking h3{margin-top:0}.field{margin:13px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#07111f;color:white}.ticket{display:none;margin-top:16px;padding:16px;border-radius:15px;background:#091a2c;border:1px dashed #39bdf855}.ticket.show{display:block}.qr{width:115px;height:115px;margin:12px auto;background:repeating-linear-gradient(45deg,#fff 0 4px,#07111f 4px 8px);border:8px solid white}.code{text-align:center;font-weight:900;letter-spacing:2px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:21px}.num{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#39bdf81c;color:var(--blue);font-weight:900}.step p{color:var(--muted);font-size:14px;line-height:1.5}.footer{border-top:1px solid var(--line);padding:35px 0 55px;color:#7f94ad}.toast{display:none;position:fixed;right:18px;bottom:18px;z-index:30;padding:14px 16px;border-radius:12px;background:#10243d;border:1px solid #39bdf855;box-shadow:0 20px 50px #0008}.toast.show{display:block}
+@media(max-width:850px){.hero,.layout{grid-template-columns:1fr}.stats,.steps{grid-template-columns:repeat(2,1fr)}nav a{display:none}}@media(max-width:520px){.stats,.steps{grid-template-columns:1fr}.parking{grid-template-columns:repeat(4,1fr);padding:12px}.hero{padding-top:45px}}
+</style></head>
 <body>
-<div style="position:fixed;right:18px;bottom:18px;z-index:50;padding:10px 14px;border:1px solid rgba(34,197,94,.25);border-radius:999px;background:rgba(7,17,31,.86);backdrop-filter:blur(12px);font-size:12px;color:#cdebd8;box-shadow:0 10px 30px rgba(0,0,0,.25)">
-  <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e;margin-right:7px"></span>Parking system online
-</div>
+<header><nav><div class="logo">Smart<b>Park</b></div><div><a href="#parking">Live Parking</a><a href="#booking">Book Space</a><a href="#how">How It Works</a></div></nav></header>
+<main>
+<div class="hero"><div><span class="badge"><span class="dot"></span> Building parking system online</span><h1>Park. Scan. Go.</h1><p>A digital parking experience for malls, offices and managed buildings. Get a QR ticket at the gate, see vacant spaces live, reserve a space instantly, and use the same digital ticket for entry and exit.</p><div class="actions"><button onclick="go('parking')">View Live Spaces</button><button class="secondary" onclick="go('booking')">Book a Parking Space</button></div></div>
+<div class="phone"><div class="screen"><div class="top"><span>SmartPark App</span><span>9:41</span></div><h3>City Centre Mall</h3><div class="mini">Live parking availability</div><div class="occupancy"><div class="ring"><b>69%</b></div><div><b>153 spaces available</b><div class="mini">347 occupied · 500 total</div></div></div><div class="mini" style="margin-top:18px">Ground Floor</div><div class="minimap" id="mini"></div><button style="width:100%;margin-top:18px" onclick="go('booking')">Reserve a Space</button></div></div></div>
 
-<nav class="nav">
-  <div class="logo">Smart<span>Park</span></div>
-  <div class="links"><a href="#features">Features</a><a href="#operations">Parking Map</a><a href="#entry">Entry & Exit</a></div>
-  <button class="navbtn" onclick="document.querySelector('#entry').scrollIntoView({behavior:'smooth'})">Manage Parking</button>
-</nav>
+<section class="wrap" id="parking"><div class="title"><div><h2>Live parking status</h2><p>Select a green space to reserve it.</p></div><span class="badge"><span class="dot"></span> Live system</span></div>
+<div class="stats"><div class="card stat"><small>Total spaces</small><strong>500</strong></div><div class="card stat"><small>Available now</small><strong class="greenText" id="available">153</strong></div><div class="card stat"><small>Occupied</small><strong>347</strong></div><div class="card stat"><small>Occupancy</small><strong class="blueText">69.4%</strong></div></div>
+<div class="layout"><div class="card map"><div class="toolbar"><button class="floor active" onclick="floor(this,'Ground Floor')">Ground Floor</button><button class="floor" onclick="floor(this,'First Floor')">First Floor</button><button class="floor" onclick="floor(this,'Basement')">Basement</button></div><b id="floorName">Ground Floor Parking Map</b><div class="parking" id="grid" style="margin-top:12px"></div><p class="mini">🟢 Available &nbsp; 🔴 Occupied &nbsp; 🟡 Reserved</p></div>
+<div class="card booking" id="booking"><h3>Reserve your space</h3><p class="mini">Book now and receive a digital QR ticket for entry and exit.</p><div class="field"><label>Vehicle number</label><input id="vehicle" placeholder="e.g. AS01AB1234"></div><div class="field"><label>Selected space</label><input id="selected" value="Select a green slot" readonly></div><div class="field"><label>Duration</label><select id="duration"><option>1 hour</option><option>2 hours</option><option>4 hours</option><option>Full day</option></select></div><button style="width:100%" onclick="reserve()">Generate QR Ticket</button><div class="ticket" id="ticket"><div style="text-align:center;color:var(--muted);font-size:11px">DIGITAL PARKING TICKET</div><h3 style="text-align:center">Entry + Exit Pass</h3><div class="qr"></div><div class="code" id="code">SP-000000</div><p class="mini" style="text-align:center">Scan this QR at the entry and exit barrier.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px"><div>Vehicle<br><b id="tv">—</b></div><div>Space<br><b id="ts">—</b></div></div></div></div></div></section>
 
-<section class="hero">
-  <div>
-    <div class="badge"><i></i> Smart parking management for modern facilities</div>
-    <h1>Make every parking space <span>count.</span></h1>
-    <p>SmartPark helps malls and commercial facilities monitor occupancy, manage vehicle entry and exit, guide drivers to available spaces, and understand parking operations from one dashboard.</p>
-    <div class="actions">
-      <button class="primary" onclick="document.querySelector('#operations').scrollIntoView({behavior:'smooth'})">View Live Parking →</button>
-      <button class="secondary" onclick="document.querySelector('#entry').scrollIntoView({behavior:'smooth'})">Entry / Exit</button>
-    </div>
-  </div>
-
-  <div class="dashboard">
-    <div class="screen">
-      <div class="screenhead"><strong>Parking Control Center</strong><span class="live">● LIVE</span></div>
-      <div class="overview">
-        <div class="mini"><b>500</b><small>Total spaces</small></div>
-        <div class="mini"><b>153</b><small>Available now</small></div>
-        <div class="mini"><b>347</b><small>Occupied</small></div>
-        <div class="mini"><b>69.4%</b><small>Occupancy</small></div>
-      </div>
-      <div class="parkingmap">
-        <div class="maptitle"><span>Ground Floor</span><span>42 available</span></div>
-        <div class="slots" id="miniSlots"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="stats">
-  <div class="stat"><b>500</b><span>Total parking spaces</span></div>
-  <div class="stat"><b>69.4%</b><span>Current occupancy</span></div>
-  <div class="stat"><b>₹28,450</b><span>Today's parking revenue</span></div>
-</div>
-
-<section class="section" id="features">
-  <h2>Everything the parking team needs.</h2>
-  <p class="sub">Built for malls, hospitals, offices, airports, hotels and other facilities with managed parking.</p>
-  <div class="cards">
-    <div class="card"><div class="icon">📊</div><h3>Live Occupancy</h3><p>See available, occupied and reserved spaces in real time.</p></div>
-    <div class="card"><div class="icon">🎟️</div><h3>Digital Tickets</h3><p>Generate QR-based parking tickets and manage entry records.</p></div>
-    <div class="card"><div class="icon">📷</div><h3>Vehicle Recognition</h3><p>Support number-plate recognition for faster vehicle verification.</p></div>
-    <div class="card"><div class="icon">💳</div><h3>Parking Payments</h3><p>Calculate parking fees automatically at vehicle exit.</p></div>
-  </div>
-</section>
-
-<section class="operations" id="operations">
-  <div class="opsbox">
-    <div>
-      <h2>Live parking map</h2>
-      <p>Select a floor and monitor individual parking spaces. In the full system, these states can be updated by sensors or computer vision.</p>
-      <p><strong>Green</strong> = available &nbsp; <strong>Red</strong> = occupied &nbsp; <strong>Yellow</strong> = reserved</p>
-    </div>
-    <div class="control">
-      <div class="controltop">
-        <strong id="floorTitle">Ground Floor</strong>
-        <div class="floor"><button class="active" onclick="setFloor('Ground Floor',this)">G</button><button onclick="setFloor('First Floor',this)">1</button><button onclick="setFloor('Basement',this)">B</button></div>
-      </div>
-      <div class="legend"><span class="lgfree">Available</span><span class="lgocc">Occupied</span><span class="lgres">Reserved</span></div>
-      <div class="bigslots" id="bigSlots"></div>
-    </div>
-  </div>
-</section>
-
-<section class="booking" id="entry">
-  <div class="bookingbox">
-    <div>
-      <h2>Vehicle entry & exit</h2>
-      <p>Simulate the parking desk workflow. Enter a vehicle number to create an entry ticket or calculate the parking charge at exit.</p>
-      <p>The production version can connect this flow to ANPR cameras, QR scanners, barriers and a payment gateway.</p>
-    </div>
-    <div class="form">
-      <label>Vehicle number</label>
-      <input id="plate" placeholder="e.g. AS01AB1234">
-      <label>Action</label>
-      <select id="action"><option value="entry">Vehicle Entry</option><option value="exit">Vehicle Exit</option></select>
-      <button class="primary full" onclick="processVehicle()">Process Vehicle</button>
-    </div>
-  </div>
-</section>
-
-<footer><div><strong>SmartPark</strong> — Smart parking management.</div><div>Parking Operations Platform</div></footer>
-
+<section class="wrap" id="how"><div class="title"><div><h2>One ticket. Entire parking journey.</h2><p>Built around the real parking flow inside a managed building.</p></div></div><div class="steps"><div class="card step"><div class="num">01</div><h3>Vehicle enters</h3><p>The gate identifies the vehicle and starts a parking session.</p></div><div class="card step"><div class="num">02</div><h3>QR ticket</h3><p>A QR ticket is issued at the gate and appears in the user's web/mobile app.</p></div><div class="card step"><div class="num">03</div><h3>Find & reserve</h3><p>Live floor maps show vacant spaces and the user can reserve one immediately.</p></div><div class="card step"><div class="num">04</div><h3>Scan & exit</h3><p>The same QR is scanned at exit. Fee is calculated and the barrier opens after payment.</p></div></div></section>
+</main><footer class="footer"><div class="wrap">SmartPark — Digital parking management for modern buildings.</div></footer><div class="toast" id="toast"></div>
 <script>
-const patterns = ['free','occupied','free','free','reserved','occupied','free','free','occupied','free','reserved','free','free','occupied','free','free','occupied','free','free','reserved','free','occupied','free','free','free','occupied','free','reserved','free','free','occupied','free','free','free','reserved','occupied','free','free','occupied','free','free','reserved','free','occupied','free','free','free','occupied'];
-
-function renderSlots(containerId){
-  const box=document.getElementById(containerId);
-  box.innerHTML='';
-  patterns.forEach((state,i)=>{
-    const s=document.createElement('div');
-    s.className='slot '+state;
-    s.textContent='A'+(i+1);
-    box.appendChild(s);
-  });
-}
-renderSlots('miniSlots');
-
-function setFloor(name,button){
-  document.getElementById('floorTitle').textContent=name;
-  document.querySelectorAll('.floor button').forEach(b=>b.classList.remove('active'));
-  button.classList.add('active');
-  const box=document.getElementById('bigSlots');
-  box.innerHTML='';
-  patterns.slice(0,48).forEach((state,i)=>{
-    const s=document.createElement('div');
-    s.className='bigslot '+state;
-    s.textContent=(name==='Basement'?'B':name[0])+String(i+1).padStart(2,'0');
-    s.title='Click to view slot status';
-    s.onclick=()=>alert(`Slot ${s.textContent}\\nStatus: ${state.toUpperCase()}`);
-    box.appendChild(s);
-  });
-}
-setFloor('Ground Floor',document.querySelector('.floor button'));
-
-function processVehicle(){
-  const plate=document.getElementById('plate').value.trim().toUpperCase();
-  const action=document.getElementById('action').value;
-  if(!plate){alert('Please enter the vehicle number.');return;}
-  if(action==='entry'){
-    alert(`Entry recorded!\\n\\nVehicle: ${plate}\\nTicket: SP-${Math.floor(10000+Math.random()*90000)}\\nStatus: Parking session started.`);
-  }else{
-    alert(`Exit processed!\\n\\nVehicle: ${plate}\\nParking duration: 2h 35m\\nParking fee: ₹50\\n\\nPayment confirmed (prototype).`);
-  }
-}
-</script>
-</body>
-</html>
+const states=['free','free','occupied','free','reserved','occupied','free','free','occupied','free','free','reserved','free','occupied','free','free','free','occupied','free','reserved','occupied','free','free','occupied','free','free','occupied','free','reserved','free','occupied','free','free','occupied','free','reserved','free','free','occupied','free','free','occupied','reserved','free','free','occupied','free','free'];
+let selected='',currentFloor='Ground Floor';
+function render(){let g=document.getElementById('grid'),m=document.getElementById('mini');g.innerHTML='';m.innerHTML='';states.forEach((s,i)=>{let x=document.createElement('div');x.className='slot '+s;x.innerHTML='P-'+String(i+1).padStart(2,'0')+'<small>'+s.toUpperCase()+'</small>';if(s==='free')x.onclick=()=>select(x,'P-'+String(i+1).padStart(2,'0'));g.appendChild(x);if(i<20){let q=document.createElement('div');q.className='mini-slot '+s;m.appendChild(q)}})}
+function select(el,s){selected=s;document.getElementById('selected').value=s+' · '+currentFloor;document.querySelectorAll('.slot').forEach(x=>x.style.outline='none');el.style.outline='3px solid white';go('booking');show(s+' selected. Complete your booking.')}
+function floor(b,n){document.querySelectorAll('.floor').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFloor=n;document.getElementById('floorName').textContent=n+' Parking Map';show('Showing live spaces on '+n)}
+function reserve(){let v=document.getElementById('vehicle').value.trim().toUpperCase();if(!v||!selected){show('Enter your vehicle number and select a green space.');return}document.getElementById('code').textContent='SP-'+Math.floor(100000+Math.random()*900000);document.getElementById('tv').textContent=v;document.getElementById('ts').textContent=selected+' · '+currentFloor;document.getElementById('ticket').classList.add('show');show('Space reserved. QR ticket generated for entry and exit.')}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}
+function show(s){let t=document.getElementById('toast');t.textContent=s;t.classList.add('show');clearTimeout(window.t);window.t=setTimeout(()=>t.classList.remove('show'),3000)}
+render();
+</script></body></html>
