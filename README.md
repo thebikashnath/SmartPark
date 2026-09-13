@@ -145,6 +145,7 @@ Open `index.html` in your browser.
 ### Option 2 — VS Code
 
 Use the **Live Server** extension and open `index.html`.
+https://smartpark-cyxs.onrender.com
 
 ---
 
